@@ -11,6 +11,7 @@ public class InteractionSensor : MonoBehaviour {
 	[HideInInspector]
 	public GameObject highlighted;
 
+
 	void Start () {
 		mainCamera = Camera.main;
 		raycastCoroutine = StartCoroutine ("DoRayCast");
@@ -18,7 +19,12 @@ public class InteractionSensor : MonoBehaviour {
 	}
 
 	void Update () {
-		
+		if (Input.GetMouseButtonDown (0)) {
+			if (highlighted != null) {
+				Interactable i = highlighted.GetComponent<Interactable> ();
+				i.Interact ();
+			}
+		}
 	}
 
 	void EnableOutline(GameObject go) {
@@ -31,32 +37,36 @@ public class InteractionSensor : MonoBehaviour {
 		outline.enabled = false;
 	}
 
+	void Highlight(GameObject go) {
+		highlighted = go;
+		EnableOutline (go);
+	}
+
+	void Unhighlight(GameObject go) {
+		DisableOutline (go);
+		highlighted = null;
+	}
+
 	IEnumerator DoRayCast() {
 		for (;;) {
 			// do it
-			Vector3 origin = camera.transform.position;
-			Vector3 direction = camera.transform.rotation.eulerAngles;
+			Vector3 origin = mainCamera.transform.position;
 			RaycastHit hit;
 
-			if(Physics.Raycast(origin, direction, out hit, 10f)) {
+			if(Physics.Raycast(origin, mainCamera.transform.forward, out hit, 200f)) {
 
 				GameObject hitObject = hit.transform.gameObject;
-				if (hitObject != null) {
-					Debug.Log (hitObject);
+
+				if (highlighted != null && hitObject != highlighted) {
+					Unhighlight (highlighted);
 				}
 
 				if (hitObject.GetComponent<Interactable> () != null) {
-					Debug.Log ("Interactable thing too!");
-
-					if (highlighted != null) {
-						DisableOutline (highlighted);
-					}
-					highlighted = hitObject;
-					EnableOutline (highlighted);
-				} 
+					Highlight (hitObject);
+				}
 			}
-			else {
-				Debug.Log ("hit nothing");
+			else if (highlighted != null) {
+				Unhighlight (highlighted);
 			}
 
 			yield return new WaitForSeconds (.2f);
