@@ -239,7 +239,7 @@ namespace cakeslice
 
             outlineCamera.Render();
         }
-
+		/**
         private void OnEnable()
         {
             Outline[] o = FindObjectsOfType<Outline>();
@@ -249,7 +249,7 @@ namespace cakeslice
                 oL.enabled = false;
                 oL.enabled = true;
             }
-        }
+        }*/
 
         void OnDestroy()
         {

@@ -9,7 +9,7 @@ public class SafeLock : MonoBehaviour {
 	GameObject hinge = null;
 
 	bool isNumlockRotating = false;
-	float numlockRotateDir = 1;
+	//float numlockRotateDir = 1;
 	float numlockRotationTarget = 0;
 
 
@@ -51,7 +51,7 @@ public class SafeLock : MonoBehaviour {
 	public void numlockRight(int targetNum) {
 		float angleCorrection = 290;
 		numlockRotationTarget = 360 - (targetNum * 360 / 10 + angleCorrection) % 360;
-		numlockRotateDir = 1;
+		//numlockRotateDir = 1;
 		isNumlockRotating = true;
 
 		if (numlock.transform.rotation.eulerAngles.z > numlockRotationTarget) {
