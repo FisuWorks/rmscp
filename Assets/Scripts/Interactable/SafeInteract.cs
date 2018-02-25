@@ -25,7 +25,7 @@ public class SafeInteract : Interactable
 
 	private bool mouseLeftDown = false;
 	private float lastMouseX = -1;
-	private float lastMouseY = -1;
+	//private float lastMouseY = -1;
 
 
 	public void Start() {
@@ -112,17 +112,17 @@ public class SafeInteract : Interactable
 			if (Input.GetMouseButtonDown (0)) {
 				mouseLeftDown = true;
 				lastMouseX = Input.mousePosition.x;
-				lastMouseY = Input.mousePosition.y;
+				//lastMouseY = Input.mousePosition.y;
 			}
 		}
 		else {
 			float currentMouseX = Input.mousePosition.x;
-			float currentMouseY = Input.mousePosition.y;
+			//float currentMouseY = Input.mousePosition.y;
 			float zRot = currentMouseX - lastMouseX;
 			numlock.transform.RotateAround (Vector3.zero, Vector3.up, zRot);
 
 			lastMouseX = currentMouseX;
-			lastMouseY = currentMouseY;
+			//lastMouseY = currentMouseY;
 		}
 	}
 

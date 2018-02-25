@@ -6,7 +6,6 @@ using cakeslice;
 public class InteractionSensor : MonoBehaviour {
 
 	private Camera mainCamera;
-	private Coroutine raycastCoroutine;
 
 	[HideInInspector]
 	public GameObject highlighted;
@@ -14,7 +13,7 @@ public class InteractionSensor : MonoBehaviour {
 
 	void Start () {
 		mainCamera = Camera.main;
-		raycastCoroutine = StartCoroutine ("DoRayCast");
+		StartCoroutine ("DoRayCast");
 		highlighted = null;
 	}
 
